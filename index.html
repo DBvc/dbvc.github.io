@@ -1,1 +1,8 @@
-hello world
+---
+title: ys blog
+---
+{% for post in site.posts %}
+{{post}}
+<a href="{{site.url}}">{{page.title}}</a>
+
+{% endfor %}
