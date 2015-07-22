@@ -1,16 +1,8 @@
 ---
-category: sicp
 title: test
 ---
 #{{page.title}}
 
-
-<table>
-	<tbody>
-		<tr><td>sd</td></tr>
-	</tbody>
-
-</table>
 test article
 
 {{page.data | data_to_string}}

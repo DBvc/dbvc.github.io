@@ -1,0 +1,21 @@
+html{
+	height: 100%;
+	font-size:  100%;
+}
+body {
+	min-height: 100%;
+	height: 100%;
+	margin: 0;
+	padding: 0;
+}
+header {
+	border-top: .5rem solid #272939;
+}
+footer {
+	padding: 2rem 0;
+	background-color: #272939;
+	color: #eee;
+}
+.content {
+	text-align: center;
+}

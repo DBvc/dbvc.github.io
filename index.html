@@ -1,8 +1,14 @@
 ---
+layout: default
+category: SICP
 title: ys blog
 ---
-{% for post in site.posts %}
-{{post}}
-<a href="{{site.url}}">{{page.title}}</a>
 
-{% endfor %}
+<h1>{{page.category}}</h1>
+
+<ul>
+	{% for post in site.posts %}
+		<li><a href="{{post.url}}" title="{{post.title}}">{{post.title}}</a></li>
+	{% endfor %}
+</ul>
+
