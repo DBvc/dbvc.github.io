@@ -17,6 +17,9 @@ footer {
 	background-color: #272939;
 	color: #eee;
 }
+code {
+	font-size: 1.2rem;
+}
 .content {
 	margin: auto;
 	padding-top: 1px;
