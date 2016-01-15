@@ -42,7 +42,7 @@ footer h2 {
 }
 code {
 	font-size: 1.2rem;
-	font-family: monospace, consolas;
+	font-family: Consolas, monospace;
 }
 pre {
 	padding: 1rem;
