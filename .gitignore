@@ -1,3 +1,4 @@
 /_site/*
 /build/*
 /serve/*
+.DS_Store

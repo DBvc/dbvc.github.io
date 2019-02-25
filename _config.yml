@@ -1,3 +1,5 @@
 baseurl: /
 permalink: /:categories/:title.html
 heightlighter: pygments
+
+markdown: kramdown
