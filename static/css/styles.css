@@ -10,9 +10,6 @@ body {
 	padding: 0;
 	min-height: 100vh;
 }
-/*header {
-	border-top: .5rem solid #272939;
-}*/
 body>header {
 	text-align: center;
 }
