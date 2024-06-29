@@ -1,4 +1,5 @@
-baseurl: /
+baseurl: ""
+url: "https://dbvc.xyz"
 permalink: /:categories/:title.html
 heightlighter: pygments
 
