@@ -1,5 +1,9 @@
 /_site/*
 /build/*
 /serve/*
+/dist/*
+/.astro/*
+/.wrangler/*
+/node_modules/*
 .DS_Store
 .bundle

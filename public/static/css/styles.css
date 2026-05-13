@@ -1,0 +1,85 @@
+html{
+	height: 100%;
+	font-size:  100%;
+	font-family: Helvetica,sans-serif, 'Microsoft Yahei';
+}
+body {
+    display: flex;
+    flex-flow: column;
+	margin: 0;
+	padding: 0;
+	min-height: 100vh;
+}
+body>header {
+	text-align: center;
+}
+nav.header-nav {
+	background-color: #272939;
+}
+nav.header-nav h2 {
+	display: inline-block;
+	margin: 0;
+  padding: .5rem 1rem;
+  width: auto;
+	color: #fff;
+}
+nav.header-nav a {
+	color: #fff;
+	text-decoration: none;
+	font-size: 1rem;
+}
+footer {
+	background-color: #272939;
+	color: #eee;
+}
+footer h2 {
+	margin: .5rem 0;
+	font-size: 1rem;
+	line-height: 2;
+}
+code {
+	font-size: 1.2rem;
+	font-family: Consolas, monospace;
+}
+pre {
+	padding: 1rem;
+	overflow: scroll;
+	background-color: #f7f7f7;
+}
+main {
+	flex: 1;
+	margin: auto;
+    padding-bottom: 5rem;
+	padding-top: 1px;
+	width: 70%;
+}
+main h1 {
+	margin: 4rem auto;
+	text-align: center;
+}
+.main-ul {
+	margin: auto;
+	padding: 0;
+	width: 70%;
+	display: flex;
+	justify-content: space-between;
+	flex-wrap: wrap;
+}
+.main-ul li {
+	min-width: 20%;
+	margin: 1rem .3rem;
+	line-height: 1.75;
+	text-align: center;
+	list-style-type: none;
+	background-color: #ccc;
+}
+.main-ul li a {
+	font-size: 1.5rem;
+	text-decoration: none;
+}
+.main-ul li a:hover {
+	text-decoration: underline;
+}
+img {
+	max-width: 100%;
+}

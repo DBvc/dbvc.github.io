@@ -1,0 +1,19 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "../layouts/Layout.astro";
+import { getPostTitle, getPostUrl, sortPosts } from "../lib/posts";
+
+const posts = sortPosts(await getCollection("posts"));
+---
+
+<Layout title="ys blog">
+  <ul class="main-ul">
+    {
+      posts.map((post) => (
+        <li>
+          <a href={getPostUrl(post)} title={getPostTitle(post)}>{getPostTitle(post)}</a>
+        </li>
+      ))
+    }
+  </ul>
+</Layout>
