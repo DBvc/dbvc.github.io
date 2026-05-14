@@ -1,0 +1,37 @@
+---
+import { formatDate } from "../lib/dates";
+
+type EntryItem = {
+  title: string;
+  description?: string;
+  href: string;
+  date?: Date;
+  meta?: string;
+};
+
+interface Props {
+  items: EntryItem[];
+  emptyText?: string;
+}
+
+const { items, emptyText = "Nothing here yet." } = Astro.props;
+---
+
+{
+  items.length > 0 ? (
+    <ol class="plain-list">
+      {items.map((item) => (
+        <li>
+          <time datetime={item.date?.toISOString()}>{formatDate(item.date)}</time>
+          <div>
+            <a href={item.href}>{item.title}</a>
+            {item.meta && <span class="entry-meta"> / {item.meta}</span>}
+            {item.description && <p>{item.description}</p>}
+          </div>
+        </li>
+      ))}
+    </ol>
+  ) : (
+    <p class="empty-state">{emptyText}</p>
+  )
+}

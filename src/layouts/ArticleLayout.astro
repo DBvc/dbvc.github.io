@@ -1,0 +1,66 @@
+---
+import AIByline from "../components/AIByline.astro";
+import BaseLayout from "./BaseLayout.astro";
+import { formatDate } from "../lib/dates";
+
+interface Props {
+  title: string;
+  description?: string;
+  pubDate?: Date;
+  updatedDate?: Date;
+  lang?: "zh" | "en";
+  tags?: string[];
+  aiAssisted?: boolean;
+  aiNote?: string;
+  backHref?: string;
+  backLabel?: string;
+}
+
+const {
+  title,
+  description = "",
+  pubDate,
+  updatedDate,
+  lang = "zh",
+  tags = [],
+  aiAssisted = false,
+  aiNote,
+  backHref,
+  backLabel = "Back",
+} = Astro.props;
+---
+
+<BaseLayout title={title} description={description || title} lang={lang} ogType="article">
+  <article class="article">
+    {backHref && <a class="back-link" href={backHref}>{backLabel}</a>}
+    <header class="article-header">
+      <h1>{title}</h1>
+      {description && <p class="article-description">{description}</p>}
+      <p class="article-meta">
+        {pubDate && <time datetime={pubDate.toISOString()}>{formatDate(pubDate)}</time>}
+        {
+          updatedDate && (
+            <>
+              <span aria-hidden="true"> / </span>
+              <span>Updated {formatDate(updatedDate)}</span>
+            </>
+          )
+        }
+      </p>
+      {
+        tags.length > 0 && (
+          <p class="article-tags">
+            {tags.map((tag) => (
+              <span>{tag}</span>
+            ))}
+          </p>
+        )
+      }
+      {aiAssisted && <AIByline note={aiNote} />}
+    </header>
+    <div class="article-body">
+      <slot />
+    </div>
+  </article>
+</BaseLayout>
+

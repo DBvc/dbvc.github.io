@@ -1,31 +1,31 @@
 import type { CollectionEntry } from "astro:content";
 
-export type Post = CollectionEntry<"posts">;
+export type SicpPost = CollectionEntry<"sicp">;
 
 const datedPostPattern = /^(\d{4})-(\d{2})-(\d{2})-(.+)$/;
 
-export function getPostCategory(post: Post) {
+export function getSicpCategory(post: SicpPost) {
   return sanitizeSegment(post.data.category ?? "sicp");
 }
 
-export function getPostSlug(post: Post) {
+export function getSicpSlug(post: SicpPost) {
   return getSourceName(post).replace(datedPostPattern, "$4").replace(/\.md$/, "");
 }
 
-export function getPostTitle(post: Post) {
+export function getSicpTitle(post: SicpPost) {
   if (typeof post.data.title === "string") {
     return post.data.title;
   }
 
-  return getExerciseTitleFromSlug(getPostSlug(post)) ?? String(post.data.title);
+  return getExerciseTitleFromSlug(getSicpSlug(post)) ?? String(post.data.title);
 }
 
-export function getPostUrl(post: Post) {
-  return `/${getPostCategory(post)}/${getPostSlug(post)}.html`;
+export function getSicpUrl(post: SicpPost) {
+  return `/${getSicpCategory(post)}/${getSicpSlug(post)}.html`;
 }
 
-export function getPostDate(post: Post) {
-  const match = post.id.match(datedPostPattern);
+export function getSicpDate(post: SicpPost) {
+  const match = getSourceName(post).match(datedPostPattern);
 
   if (!match) {
     return new Date(0);
@@ -34,15 +34,15 @@ export function getPostDate(post: Post) {
   return new Date(`${match[1]}-${match[2]}-${match[3]}T00:00:00.000Z`);
 }
 
-export function sortPosts(posts: Post[]) {
+export function sortSicpPosts(posts: SicpPost[]) {
   return posts.toSorted((a, b) => {
-    const byDate = getPostDate(b).getTime() - getPostDate(a).getTime();
+    const byDate = getSicpDate(b).getTime() - getSicpDate(a).getTime();
 
     if (byDate !== 0) {
       return byDate;
     }
 
-    return getPostSlug(a).localeCompare(getPostSlug(b));
+    return getSicpSlug(a).localeCompare(getSicpSlug(b));
   });
 }
 
@@ -54,6 +54,7 @@ function getExerciseTitleFromSlug(slug: string) {
   return slug.match(/(?:^|-)sicp\.?(\d+\.\d+)$/)?.[1] ?? null;
 }
 
-function getSourceName(post: Post) {
+function getSourceName(post: SicpPost) {
   return post.filePath?.split("/").at(-1) ?? post.id;
 }
+

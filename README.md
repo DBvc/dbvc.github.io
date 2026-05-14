@@ -1,6 +1,6 @@
-# dbvc.github.io
+# dbvc.xyz
 
-Just Sicp, now built with Astro.
+Personal site of DBvc / Yang.S. Built with Astro as a static, text-first writing site.
 
 ## Development
 
@@ -17,17 +17,24 @@ npm run build
 
 Astro writes the static site to `dist/`.
 
-## Deploy to Cloudflare
+## Content
 
-For Cloudflare Pages, use:
+- `src/content/posts`: long-form writing
+- `src/content/notes`: short notes
+- `src/content/projects`: projects and experiments
+- `_posts`: legacy SICP archive
+
+The SICP archive keeps the old dated Markdown posts and publishes them with the legacy `/:category/:slug.html` URL shape.
+
+## Deployment
+
+For Cloudflare Pages or another static host, use:
 
 - Build command: `npm run build`
 - Build output directory: `dist`
 
-For Cloudflare Workers static assets, use:
+This repo also includes `wrangler.jsonc` for Cloudflare Workers static assets:
 
 ```sh
 npm run deploy
 ```
-
-The current Astro migration keeps the old Jekyll content in `_posts/` and publishes dated Markdown posts with the legacy `/:category/:slug.html` URL shape.

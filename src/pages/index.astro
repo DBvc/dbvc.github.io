@@ -1,19 +1,97 @@
 ---
 import { getCollection } from "astro:content";
-import Layout from "../layouts/Layout.astro";
-import { getPostTitle, getPostUrl, sortPosts } from "../lib/posts";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PlainEntryList from "../components/PlainEntryList.astro";
+import { byPubDateDesc, isPublished } from "../lib/content";
+import { getSicpDate, getSicpSlug, getSicpTitle, getSicpUrl, sortSicpPosts } from "../lib/sicp";
+import { noteUrl, writingUrl } from "../lib/urls";
 
-const posts = sortPosts(await getCollection("posts"));
+const posts = (await getCollection("posts")).filter(isPublished).sort(byPubDateDesc).slice(0, 5);
+const notes = (await getCollection("notes")).filter(isPublished).sort(byPubDateDesc).slice(0, 5);
+const projects = (await getCollection("projects")).filter((project) => project.data.featured).slice(0, 4);
+const sicpPosts = sortSicpPosts(await getCollection("sicp"))
+  .filter((post) => getSicpSlug(post).startsWith("sicp"))
+  .slice(0, 6);
 ---
 
-<Layout title="ys blog">
-  <ul class="main-ul">
-    {
-      posts.map((post) => (
-        <li>
-          <a href={getPostUrl(post)} title={getPostTitle(post)}>{getPostTitle(post)}</a>
-        </li>
-      ))
-    }
-  </ul>
-</Layout>
+<BaseLayout title="DBvc">
+  <section class="intro" aria-labelledby="site-name">
+    <h1 id="site-name">DBvc</h1>
+    <p>程序员。</p>
+    <p>这里是我的文章、笔记、项目和旧练习归档。</p>
+    <p class="inline-links">
+      <a href="/writing.html">Writing</a>
+      <span aria-hidden="true">/</span>
+      <a href="/notes.html">Notes</a>
+      <span aria-hidden="true">/</span>
+      <a href="/projects.html">Projects</a>
+      <span aria-hidden="true">/</span>
+      <a href="/about.html">About</a>
+      <span aria-hidden="true">/</span>
+      <a href="/rss.xml">RSS</a>
+      <span aria-hidden="true">/</span>
+      <a href="https://github.com/DBvc" target="_blank" rel="me noopener noreferrer">GitHub</a>
+    </p>
+  </section>
+
+  <section class="index-section" aria-labelledby="recently-title">
+    <h2 id="recently-title">Recently</h2>
+    <PlainEntryList
+      items={posts.map((post) => ({
+        title: post.data.title,
+        description: post.data.description,
+        href: writingUrl(post),
+        date: post.data.pubDate,
+        meta: post.data.aiAssisted ? "AI-assisted" : undefined,
+      }))}
+      emptyText="暂无文章。"
+    />
+  </section>
+
+  <section class="index-section" aria-labelledby="notes-title">
+    <h2 id="notes-title">Notes</h2>
+    <PlainEntryList
+      items={notes.map((note) => ({
+        title: note.data.title,
+        description: note.data.description,
+        href: noteUrl(note),
+        date: note.data.pubDate,
+      }))}
+      emptyText="暂无笔记。"
+    />
+  </section>
+
+  <section class="index-section" aria-labelledby="projects-title">
+    <h2 id="projects-title">Projects / Archive</h2>
+    <ul class="link-list">
+      {
+        projects.map((project) => (
+          <li>
+            <span>{project.data.title}</span>
+            <p>{project.data.description}</p>
+          </li>
+        ))
+      }
+      <li>
+        <a href="/sicp.html">SICP Practice</a>
+        <p>Old exercises and notes from an earlier season of learning.</p>
+      </li>
+      <li>
+        <a href="https://github.com/DBvc" target="_blank" rel="me noopener noreferrer">GitHub</a>
+        <p>Code, experiments, and small tools.</p>
+      </li>
+    </ul>
+  </section>
+
+  <section class="index-section" aria-labelledby="sicp-title">
+    <h2 id="sicp-title">SICP Practice</h2>
+    <PlainEntryList
+      items={sicpPosts.map((post) => ({
+        title: getSicpTitle(post),
+        href: getSicpUrl(post),
+        date: getSicpDate(post),
+      }))}
+    />
+    <p class="more-link"><a href="/sicp.html">Browse the archive</a></p>
+  </section>
+</BaseLayout>

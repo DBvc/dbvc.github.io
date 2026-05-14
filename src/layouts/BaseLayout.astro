@@ -1,0 +1,54 @@
+---
+import SiteFooter from "../components/SiteFooter.astro";
+import SiteHeader from "../components/SiteHeader.astro";
+import "../styles/global.css";
+import { SITE_URL } from "../lib/urls";
+
+interface Props {
+  title?: string;
+  description?: string;
+  lang?: "zh" | "en";
+  canonical?: string;
+  ogType?: "website" | "article";
+}
+
+const {
+  title = "DBvc",
+  description = "程序员。",
+  lang = "zh",
+  canonical,
+  ogType = "website",
+} = Astro.props;
+
+const siteName = "DBvc";
+const pageTitle = title === siteName ? siteName : `${title} | ${siteName}`;
+const canonicalPath = Astro.url.pathname === "/index.html" ? "/" : Astro.url.pathname;
+const canonicalUrl = canonical ?? new URL(canonicalPath, SITE_URL).toString();
+---
+
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="author" content="DBvc" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{pageTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalUrl} />
+    <link rel="alternate" type="application/rss+xml" title="DBvc RSS" href="/rss.xml" />
+    <meta property="og:type" content={ogType} />
+    <meta property="og:site_name" content={siteName} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalUrl} />
+  </head>
+  <body>
+    <div class="page">
+      <SiteHeader />
+      <main>
+        <slot />
+      </main>
+      <SiteFooter />
+    </div>
+  </body>
+</html>

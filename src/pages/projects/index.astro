@@ -1,0 +1,40 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+const projects = await getCollection("projects");
+---
+
+<BaseLayout title="Projects" description="项目、工具、实验和一些还在打磨中的工作流。">
+  <section class="page-title">
+    <h1>Projects</h1>
+    <p>项目、工具、实验和一些还在打磨中的工作流。</p>
+  </section>
+
+  <ol class="project-list">
+    {
+      projects.map((project) => (
+        <li>
+          <h2>{project.data.title}</h2>
+          <p>{project.data.description}</p>
+          <p class="entry-meta">
+            {project.data.status}
+            {project.data.repo && (
+              <>
+                <span aria-hidden="true"> / </span>
+                <a href={project.data.repo} rel="noreferrer">repo</a>
+              </>
+            )}
+            {project.data.demo && (
+              <>
+                <span aria-hidden="true"> / </span>
+                <a href={project.data.demo} rel="noreferrer">demo</a>
+              </>
+            )}
+          </p>
+        </li>
+      ))
+    }
+  </ol>
+</BaseLayout>
+

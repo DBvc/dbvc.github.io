@@ -1,0 +1,28 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import PlainEntryList from "../../components/PlainEntryList.astro";
+import { byPubDateDesc, isPublished } from "../../lib/content";
+import { writingUrl } from "../../lib/urls";
+
+const posts = (await getCollection("posts")).filter(isPublished).sort(byPubDateDesc);
+---
+
+<BaseLayout title="Writing" description="正式文章，长一点，也更有判断。">
+  <section class="page-title">
+    <h1>Writing</h1>
+    <p>正式文章，长一点，也更有判断。</p>
+  </section>
+
+  <PlainEntryList
+    items={posts.map((post) => ({
+      title: post.data.title,
+      description: post.data.description,
+      href: writingUrl(post),
+      date: post.data.pubDate,
+      meta: post.data.aiAssisted ? "AI-assisted" : undefined,
+    }))}
+    emptyText="No writing published yet."
+  />
+</BaseLayout>
+

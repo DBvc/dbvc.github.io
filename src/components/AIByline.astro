@@ -1,0 +1,15 @@
+---
+interface Props {
+  note?: string;
+}
+
+const {
+  note = "本文部分结构由 AI 辅助整理，观点和最终表达由作者负责。",
+} = Astro.props;
+---
+
+<p class="ai-byline">
+  <span>AI-assisted:</span>
+  {note}
+</p>
+

@@ -1,15 +1,15 @@
 ---
 import { getCollection, render } from "astro:content";
-import Layout from "../../layouts/Layout.astro";
-import { getPostCategory, getPostSlug, getPostTitle } from "../../lib/posts";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { getSicpCategory, getSicpSlug, getSicpTitle } from "../../lib/sicp";
 
 export async function getStaticPaths() {
-  const posts = await getCollection("posts");
+  const posts = await getCollection("sicp");
 
   return posts.map((post) => ({
     params: {
-      category: getPostCategory(post),
-      slug: getPostSlug(post),
+      category: getSicpCategory(post),
+      slug: getSicpSlug(post),
     },
     props: { post },
   }));
@@ -19,8 +19,14 @@ const { post } = Astro.props;
 const { Content } = await render(post);
 ---
 
-<Layout title={getPostTitle(post)}>
-  <article class="post">
+<BaseLayout title={getSicpTitle(post)} description="SICP Practice archive entry." ogType="article">
+  <article class="article legacy-post">
+    <a class="back-link" href="/sicp.html">SICP Archive</a>
+    <header class="article-header">
+      <h1>{getSicpTitle(post)}</h1>
+    </header>
+    <div class="article-body">
     <Content />
+    </div>
   </article>
-</Layout>
+</BaseLayout>

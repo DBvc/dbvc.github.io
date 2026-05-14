@@ -1,0 +1,29 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { formatDate } from "../../lib/dates";
+import { getSicpDate, getSicpTitle, getSicpUrl, sortSicpPosts } from "../../lib/sicp";
+
+const posts = sortSicpPosts(await getCollection("sicp"));
+---
+
+<BaseLayout title="SICP Archive" description="旧 SICP 练习与笔记归档。">
+  <section class="page-title">
+    <h1>SICP Archive</h1>
+    <p>Old exercises and notes from an earlier season of learning.</p>
+  </section>
+
+  <ol class="plain-list compact">
+    {
+      posts.map((post) => (
+        <li>
+          <time datetime={getSicpDate(post).toISOString()}>{formatDate(getSicpDate(post))}</time>
+          <div>
+            <a href={getSicpUrl(post)}>{getSicpTitle(post)}</a>
+          </div>
+        </li>
+      ))
+    }
+  </ol>
+</BaseLayout>
+

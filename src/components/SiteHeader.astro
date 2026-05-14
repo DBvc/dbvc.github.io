@@ -1,0 +1,34 @@
+---
+const navItems = [
+  { href: "/writing.html", match: "/writing", label: "Writing" },
+  { href: "/notes.html", match: "/notes", label: "Notes" },
+  { href: "/projects.html", match: "/projects", label: "Projects" },
+  { href: "/about.html", match: "/about", label: "About" },
+  { href: "/rss.xml", match: "/rss.xml", label: "RSS" },
+];
+
+const currentPath = Astro.url.pathname;
+
+function isActive(href: string) {
+  if (href === "/rss.xml") {
+    return false;
+  }
+
+  const item = navItems.find((navItem) => navItem.href === href);
+  return currentPath === href || Boolean(item?.match && currentPath.startsWith(`${item.match}/`));
+}
+---
+
+<header class="site-header" aria-label="Site header">
+  <a class="site-title" href="/">DBvc</a>
+  <nav class="site-nav" aria-label="Primary navigation">
+    {
+      navItems.map((item) => (
+        <a href={item.href} aria-current={isActive(item.href) ? "page" : undefined}>
+          {item.label}
+        </a>
+      ))
+    }
+    <a href="https://github.com/DBvc" target="_blank" rel="me noopener noreferrer">GitHub</a>
+  </nav>
+</header>
