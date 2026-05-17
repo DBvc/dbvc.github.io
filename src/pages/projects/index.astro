@@ -1,6 +1,7 @@
 ---
 import { getCollection } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import { projectUrl } from "../../lib/urls";
 
 const projects = await getCollection("projects");
 ---
@@ -15,7 +16,7 @@ const projects = await getCollection("projects");
     {
       projects.map((project) => (
         <li>
-          <h2>{project.data.title}</h2>
+          <h2><a href={projectUrl(project)}>{project.data.title}</a></h2>
           <p>{project.data.description}</p>
           <p class="entry-meta">
             {project.data.status}
@@ -37,4 +38,3 @@ const projects = await getCollection("projects");
     }
   </ol>
 </BaseLayout>
-

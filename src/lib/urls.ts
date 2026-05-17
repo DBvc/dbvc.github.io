@@ -28,3 +28,7 @@ export function noteUrl(entry: ContentEntryRef) {
 export function noteMarkdownUrl(entry: ContentEntryRef) {
   return `/notes/${contentSlug(entry)}.md`;
 }
+
+export function projectUrl(entry: ContentEntryRef) {
+  return `/projects/${contentSlug(entry)}.html`;
+}
