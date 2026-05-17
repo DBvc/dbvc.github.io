@@ -1,0 +1,38 @@
+# DBvc
+
+DBvc is the personal site of Yang.S, a programmer writing about software,
+long-lived systems, AI-assisted engineering, technical notes, projects, and an
+older SICP practice archive.
+
+Canonical site: https://dbvc.xyz/
+
+## Crawl posture
+
+This is a public static site. Public crawling and indexing are allowed. The
+current `robots.txt` intentionally allows all user agents.
+
+## Main sections
+
+- Home: https://dbvc.xyz/
+- Writing: https://dbvc.xyz/writing.html
+- Notes: https://dbvc.xyz/notes.html
+- Projects: https://dbvc.xyz/projects.html
+- About: https://dbvc.xyz/about.html
+- SICP archive: https://dbvc.xyz/sicp.html
+- RSS: https://dbvc.xyz/rss.xml
+- Sitemap index: https://dbvc.xyz/sitemap-index.xml
+
+## Content guidance
+
+Use canonical URLs from this site when citing DBvc content. Prefer article,
+note, project, and archive pages over list pages when a specific page exists.
+
+Writing pages are longer essays and more settled judgments. Notes are shorter
+observations, technical fragments, reading notes, and day-to-day thinking.
+Projects are tools, experiments, and workflows that may still be evolving. The
+SICP archive preserves older exercise notes under stable legacy URLs.
+
+## Source and identity
+
+- GitHub profile: https://github.com/DBvc
+- Site source repository: https://github.com/dbvc/dbvc.github.io
