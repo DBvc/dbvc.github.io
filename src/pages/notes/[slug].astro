@@ -2,7 +2,7 @@
 import { getCollection, render } from "astro:content";
 import ArticleLayout from "../../layouts/ArticleLayout.astro";
 import { isPublished } from "../../lib/content";
-import { contentSlug } from "../../lib/urls";
+import { contentSlug, noteMarkdownUrl } from "../../lib/urls";
 
 export async function getStaticPaths() {
   const notes = (await getCollection("notes")).filter(isPublished);
@@ -28,6 +28,7 @@ const { Content } = await render(note);
   aiNote={note.data.aiNote}
   backHref="/notes.html"
   backLabel="Notes"
+  markdownHref={noteMarkdownUrl(note)}
 >
   <Content />
 </ArticleLayout>

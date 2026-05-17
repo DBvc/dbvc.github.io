@@ -9,6 +9,7 @@ interface Props {
   description?: string;
   lang?: "zh" | "en";
   canonical?: string;
+  markdownHref?: string;
   ogType?: "website" | "article";
 }
 
@@ -17,6 +18,7 @@ const {
   description = "程序员。",
   lang = "zh",
   canonical,
+  markdownHref,
   ogType = "website",
 } = Astro.props;
 
@@ -24,6 +26,7 @@ const siteName = "DBvc";
 const pageTitle = title === siteName ? siteName : `${title} | ${siteName}`;
 const canonicalPath = Astro.url.pathname === "/index.html" ? "/" : Astro.url.pathname;
 const canonicalUrl = canonical ?? new URL(canonicalPath, SITE_URL).toString();
+const markdownUrl = markdownHref ? new URL(markdownHref, SITE_URL).toString() : undefined;
 ---
 
 <!doctype html>
@@ -36,6 +39,7 @@ const canonicalUrl = canonical ?? new URL(canonicalPath, SITE_URL).toString();
     <meta name="description" content={description} />
     <link rel="canonical" href={canonicalUrl} />
     <link rel="alternate" type="application/rss+xml" title="DBvc RSS" href="/rss.xml" />
+    {markdownUrl && <link rel="alternate" type="text/markdown" href={markdownUrl} />}
     <meta property="og:type" content={ogType} />
     <meta property="og:site_name" content={siteName} />
     <meta property="og:title" content={pageTitle} />

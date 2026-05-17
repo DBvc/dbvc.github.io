@@ -14,6 +14,7 @@ interface Props {
   aiNote?: string;
   backHref?: string;
   backLabel?: string;
+  markdownHref?: string;
 }
 
 const {
@@ -27,10 +28,17 @@ const {
   aiNote,
   backHref,
   backLabel = "Back",
+  markdownHref,
 } = Astro.props;
 ---
 
-<BaseLayout title={title} description={description || title} lang={lang} ogType="article">
+<BaseLayout
+  title={title}
+  description={description || title}
+  lang={lang}
+  markdownHref={markdownHref}
+  ogType="article"
+>
   <article class="article">
     {backHref && <a class="back-link" href={backHref}>{backLabel}</a>}
     <header class="article-header">
@@ -63,4 +71,3 @@ const {
     </div>
   </article>
 </BaseLayout>
-
