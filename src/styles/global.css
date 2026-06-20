@@ -162,11 +162,15 @@ main {
   border-top: 1px solid var(--border);
 }
 
-.site-footer p,
+.site-footer .footer-links,
 .inline-links {
   display: flex;
   flex-wrap: wrap;
   gap: 0.35rem 0.6rem;
+}
+
+.site-footer .footer-note {
+  margin: 0 0 0.65rem;
 }
 
 .intro h1,
@@ -182,6 +186,12 @@ main {
   font-size: clamp(2rem, 1.7rem + 1vw, 2.75rem);
 }
 
+.intro .identity-mark {
+  margin-top: 0.35rem;
+  color: var(--muted);
+  font-size: 1.05rem;
+}
+
 .intro p {
   max-width: 42rem;
   margin: 1rem 0 0;
@@ -189,6 +199,10 @@ main {
 
 .intro .inline-links {
   margin-top: 1.25rem;
+}
+
+.intro .tagline {
+  color: var(--muted);
 }
 
 .index-section,

@@ -9,22 +9,27 @@ import { noteUrl, writingUrl } from "../lib/urls";
 const posts = (await getCollection("posts")).filter(isPublished).sort(byPubDateDesc).slice(0, 5);
 const notes = (await getCollection("notes")).filter(isPublished).sort(byPubDateDesc).slice(0, 5);
 const projects = (await getCollection("projects")).filter((project) => project.data.featured).slice(0, 4);
+const currentWork = ["Agent-operable Architecture", "Agent Skill Control Theory", "DBX Skills"];
 const sicpPosts = sortSicpPosts(await getCollection("sicp"))
   .filter((post) => getSicpSlug(post).startsWith("sicp"))
   .slice(0, 6);
 ---
 
-<BaseLayout title="DBvc">
+<BaseLayout title="DBvc" description="程序员。写软件系统、开发者工具和 AI-native engineering workflows。">
   <section class="intro" aria-labelledby="site-name">
     <h1 id="site-name">DBvc</h1>
-    <p>程序员。</p>
-    <p>这里是我的文章、笔记、项目和旧练习归档。</p>
+    <p class="identity-mark">db.oneir</p>
+    <p>程序员。写软件系统、开发者工具、AI-native engineering workflows，也记录一些关于架构、判断和长期自我迭代的笔记。</p>
+    <p>这里保存文章、笔记、项目和旧练习归档。</p>
+    <p class="tagline">A curious life in software systems.</p>
     <p class="inline-links">
       <a href="/writing.html">Writing</a>
       <span aria-hidden="true">/</span>
       <a href="/notes.html">Notes</a>
       <span aria-hidden="true">/</span>
       <a href="/projects.html">Projects</a>
+      <span aria-hidden="true">/</span>
+      <a href="/sicp.html">Archive</a>
       <span aria-hidden="true">/</span>
       <a href="/about.html">About</a>
       <span aria-hidden="true">/</span>
@@ -64,6 +69,10 @@ const sicpPosts = sortSicpPosts(await getCollection("sicp"))
   <section class="index-section" aria-labelledby="projects-title">
     <h2 id="projects-title">Projects / Archive</h2>
     <ul class="link-list">
+      <li>
+        <span>Current work</span>
+        <p>{currentWork.join(" / ")}</p>
+      </li>
       {
         projects.map((project) => (
           <li>
@@ -74,11 +83,11 @@ const sicpPosts = sortSicpPosts(await getCollection("sicp"))
       }
       <li>
         <a href="/sicp.html">SICP Practice</a>
-        <p>Old exercises and notes from an earlier season of learning.</p>
+        <p>旧 SICP 练习与笔记归档。</p>
       </li>
       <li>
         <a href="https://github.com/DBvc" target="_blank" rel="me noopener noreferrer">GitHub</a>
-        <p>Code, experiments, and small tools.</p>
+        <p>代码、实验和小工具。</p>
       </li>
     </ul>
   </section>

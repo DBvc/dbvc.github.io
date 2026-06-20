@@ -4,6 +4,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import { projectUrl } from "../../lib/urls";
 
 const projects = await getCollection("projects");
+const currentWork = ["Agent-operable Architecture", "Agent Skill Control Theory", "DBX Skills"];
 ---
 
 <BaseLayout title="Projects" description="项目、工具、实验和一些还在打磨中的工作流。">
@@ -12,29 +13,61 @@ const projects = await getCollection("projects");
     <p>项目、工具、实验和一些还在打磨中的工作流。</p>
   </section>
 
-  <ol class="project-list">
-    {
-      projects.map((project) => (
-        <li>
-          <h2><a href={projectUrl(project)}>{project.data.title}</a></h2>
-          <p>{project.data.description}</p>
-          <p class="entry-meta">
-            {project.data.status}
-            {project.data.repo && (
-              <>
-                <span aria-hidden="true"> / </span>
-                <a href={project.data.repo} rel="noreferrer">repo</a>
-              </>
-            )}
-            {project.data.demo && (
-              <>
-                <span aria-hidden="true"> / </span>
-                <a href={project.data.demo} rel="noreferrer">demo</a>
-              </>
-            )}
-          </p>
-        </li>
-      ))
-    }
-  </ol>
+  <section class="index-section" aria-labelledby="current-work-title">
+    <h2 id="current-work-title">Current work</h2>
+    <ul class="link-list">
+      {
+        currentWork.map((item) => (
+          <li>
+            <span>{item}</span>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+
+  {
+    projects.length > 0 && (
+      <section class="index-section" aria-labelledby="project-entries-title">
+        <h2 id="project-entries-title">Project notes</h2>
+        <ol class="project-list">
+          {projects.map((project) => (
+            <li>
+              <h2><a href={projectUrl(project)}>{project.data.title}</a></h2>
+              <p>{project.data.description}</p>
+              <p class="entry-meta">
+                {project.data.status}
+                {project.data.repo && (
+                  <>
+                    <span aria-hidden="true"> / </span>
+                    <a href={project.data.repo} rel="noreferrer">repo</a>
+                  </>
+                )}
+                {project.data.demo && (
+                  <>
+                    <span aria-hidden="true"> / </span>
+                    <a href={project.data.demo} rel="noreferrer">demo</a>
+                  </>
+                )}
+              </p>
+            </li>
+          ))}
+        </ol>
+      </section>
+    )
+  }
+
+  <section class="index-section" aria-labelledby="archive-title">
+    <h2 id="archive-title">Archive</h2>
+    <ul class="link-list">
+      <li>
+        <a href="/sicp.html">SICP Practice</a>
+        <p>旧 SICP 练习与笔记归档。</p>
+      </li>
+      <li>
+        <a href="https://github.com/DBvc" target="_blank" rel="me noopener noreferrer">GitHub</a>
+        <p>代码、实验和小工具。</p>
+      </li>
+    </ul>
+  </section>
 </BaseLayout>

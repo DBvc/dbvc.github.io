@@ -1,8 +1,10 @@
 # DBvc
 
-DBvc is the personal site of Yang.S, a programmer writing about software,
-long-lived systems, AI-assisted engineering, technical notes, projects, and an
-older SICP practice archive.
+DBvc is the personal site of DBvc, a programmer writing about software systems,
+developer tools, AI-native engineering workflows, architecture judgment,
+technical notes, projects, and an older SICP practice archive.
+
+Names used on the site: DBvc and db.oneir. DBvc remains the site name.
 
 Canonical site: https://dbvc.xyz/
 
