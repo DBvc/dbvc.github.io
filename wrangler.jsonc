@@ -1,6 +1,6 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "dbvc-site",
+  "name": "personal-website",
   "compatibility_date": "2026-05-13",
   "assets": {
     "directory": "./dist",
